@@ -1,22 +1,13 @@
 require 'sinatra'
 require 'rack/handler/puma'
 require 'csv'
+require_relative 'import_data_csv'
 
-get '/tests' do
-  rows = CSV.read("./data.csv", col_sep: ';')
-
-  columns = rows.shift
-
-  rows.map do |row|
-    row.each_with_object({}).with_index do |(cell, acc), idx|
-      column = columns[idx]
-      acc[column] = cell
-    end
-  end.to_json
-end
-
-get '/hello' do
-  'Hello world!'
+get '/api/exams' do
+  ImportDataCsv.new
+  conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
+  exams = conn.exec('SELECT * FROM EXAMS')
+  exams.map { |e| e }.to_json
 end
 
 Rack::Handler::Puma.run(
