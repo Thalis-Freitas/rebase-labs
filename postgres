@@ -1,0 +1,7 @@
+docker run \
+  --rm \
+  --name postgres \
+  -e POSTGRES_HOST_AUTH_METHOD=trust \
+  -v pgdata:/var/lib/postgresql/data \
+  --network rebase-labs \
+  postgres
