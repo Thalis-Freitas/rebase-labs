@@ -2,7 +2,6 @@ require 'csv'
 require 'pg'
 
 class ImportDataCsv
-  attr_accessor :conn
 
   def initialize
     @conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
