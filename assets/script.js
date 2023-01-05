@@ -1,5 +1,6 @@
 const url = "http://localhost:3000/api/exams"
 const tbory = document.getElementById("tbory") 
+const reportError = document.getElementById("error") 
 
 fetch(url)
     .then((res) => {
@@ -21,3 +22,8 @@ fetch(url)
                 </tr>`
         })
     })
+    .catch(() => {
+    reportError.innerHTML = `<div class="alert alert-warning" role="alert">
+                                Ops, ocorreu um erro.
+                             </div>`
+  })

@@ -1,0 +1,13 @@
+:root {
+    --border-color: rgb(231, 231, 231);
+  }
+
+th{
+    border-top: 1px solid var(--border-color);
+}
+
+th, td{
+    text-align: center;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+}

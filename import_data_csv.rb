@@ -58,4 +58,9 @@ class ImportDataCsv
                  )
     end
   end
+
+  def all
+    exams = @conn.exec('SELECT * FROM EXAMS LIMIT 300')
+    exams.map { |e| e }.to_json
+  end
 end
