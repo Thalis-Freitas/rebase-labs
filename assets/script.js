@@ -1,6 +1,8 @@
 const url = "http://localhost:3000/api/exams"
-const tbory = document.getElementById("tbory") 
-const reportError = document.getElementById("error") 
+
+function format_data(data){
+    return data.split("-").reverse().join("/")
+}
 
 fetch(url)
     .then((res) => {
@@ -8,22 +10,21 @@ fetch(url)
     })
     .then((exams) => {
         exams.forEach(exam => {
-            tbory.innerHTML +=`
-                <tr>
-                    <td>${exam.token}</td>
-                    <td>${exam.medical_crm}</td>
-                    <td>${exam.name}</td>
-                    <td>${exam.taxpayer_registry}</td>
-                    <td>${exam.address}</td>
-                    <td>${exam.city}/${exam.state}</td>
-                    <td>${exam.type_of_exam}</td>
-                    <td>${exam.limits}</td>
-                    <td>${exam.result}</td>
-                </tr>`
+            const tbory = document.getElementById("tbory") 
+            let newRow = tbory.insertRow(-1)
+            newRow.insertCell(0).textContent = `${exam.token}`
+            newRow.insertCell(1).textContent = `${exam.medical_crm}`
+            newRow.insertCell(2).textContent = `${exam.name}`
+            newRow.insertCell(3).textContent = `${exam.taxpayer_registry}`
+            newRow.insertCell(4).textContent = `${format_data(exam.exam_date)}`
+            newRow.insertCell(5).textContent = `${exam.city}/${exam.state}`
+            newRow.insertCell(6).textContent = `${exam.type_of_exam}`
+            newRow.insertCell(7).textContent = `${exam.limits}`
+            newRow.insertCell(8).textContent = `${exam.result}`
         })
     })
     .catch(() => {
-    reportError.innerHTML = `<div class="alert alert-warning" role="alert">
-                                Ops, ocorreu um erro.
-                             </div>`
+        const reportError = document.getElementById("error") 
+        reportError.classList.add("alert", "alert-warning")
+        reportError.textContent = "Ops, ocorreu um erro."
   })

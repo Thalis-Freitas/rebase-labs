@@ -4,6 +4,7 @@ docker run \
   -w /app \
   -v $(pwd):/app \
   -v /rubygems:/usr/local/bundle \
+  -v /rubygems:/usr/local/gem/cache \
   -p 3000:3000 \
   --network rebase-labs \
   ruby \

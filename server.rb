@@ -9,7 +9,7 @@ get '/' do
 end
 
 get '/api/exams' do
-  ImportDataCsv.new.all
+  ImportDataCsv.new.all_in_json
 end
 
 Rack::Handler::Puma.run(
