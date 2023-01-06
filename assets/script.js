@@ -1,7 +1,7 @@
 const url = "http://localhost:3000/api/exams"
 
-function format_data(data){
-    return data.split("-").reverse().join("/")
+function formatDate(date){
+    return date.split("-").reverse().join("/")
 }
 
 fetch(url)
@@ -10,13 +10,13 @@ fetch(url)
     })
     .then((exams) => {
         exams.forEach(exam => {
-            const tbory = document.getElementById("tbory") 
-            let newRow = tbory.insertRow(-1)
+            const tBory = document.getElementById("tbory") 
+            let newRow = tBory.insertRow(-1)
             newRow.insertCell(0).textContent = `${exam.token}`
             newRow.insertCell(1).textContent = `${exam.medical_crm}`
             newRow.insertCell(2).textContent = `${exam.name}`
             newRow.insertCell(3).textContent = `${exam.taxpayer_registry}`
-            newRow.insertCell(4).textContent = `${format_data(exam.exam_date)}`
+            newRow.insertCell(4).textContent = `${formatDate(exam.exam_date)}`
             newRow.insertCell(5).textContent = `${exam.city}/${exam.state}`
             newRow.insertCell(6).textContent = `${exam.type_of_exam}`
             newRow.insertCell(7).textContent = `${exam.limits}`
