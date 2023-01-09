@@ -8,4 +8,4 @@ docker run \
   -p 3000:3000 \
   --network rebase-labs \
   ruby \
-  bash -c "bundle install && ruby server.rb"
+  bash -c "bundle && ruby server.rb"
