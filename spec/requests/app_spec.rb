@@ -32,4 +32,9 @@ describe 'App' do
     expect(last_response.body).to include 'Tipo'
     expect(last_response.body).to include 'Limites'
 	end
+
+  it 'post /import' do
+    post '/import', csv: './spec/support/exams.csv'
+    expect(last_response.status).to eq 200
+  end
 end

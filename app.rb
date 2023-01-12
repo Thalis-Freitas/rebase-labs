@@ -11,3 +11,8 @@ get '/api/exams' do
 	data.insert_records('./data.csv')
 	data.all.to_json
 end
+
+post '/import' do
+	ImportDataCsv.new.insert_records(params[:csv])
+	'Dados registrados com sucesso!'
+end
