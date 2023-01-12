@@ -2,11 +2,8 @@ require 'csv'
 require 'pg'
 
 class ImportDataCsv
-
   def initialize
     @conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
-    create_table
-    insert_records
   end
 
   def create_table
@@ -31,8 +28,8 @@ class ImportDataCsv
                )
   end
 
-  def csv_data
-    rows = CSV.read('./data.csv', col_sep: ';')
+  def csv_data(csv)
+    rows = CSV.read(csv, col_sep: ';')
     columns = rows.shift
 
     rows.map do |row|
@@ -43,8 +40,8 @@ class ImportDataCsv
     end
   end
 
-  def insert_records
-    csv_data.each do |r|
+  def insert_records(csv)
+    csv_data(csv).each do |r|
       @conn.exec("INSERT INTO EXAMS (TAXPAYER_REGISTRY, NAME, EMAIL, BIRTH_DATE, ADDRESS, CITY, STATE,
                                      MEDICAL_CRM, MEDICAL_CRM_STATE, MEDICAL_NAME, MEDICAL_EMAIL,
                                      TOKEN, EXAM_DATE, TYPE_OF_EXAM, LIMITS, RESULT)
@@ -59,8 +56,8 @@ class ImportDataCsv
     end
   end
 
-  def all_in_json
+  def all
     exams = @conn.exec('SELECT * FROM EXAMS LIMIT 300')
-    exams.map { |e| e }.to_json
+    exams.map { |e| e }
   end
 end

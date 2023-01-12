@@ -27,4 +27,4 @@ fetch(url)
         const reportError = document.getElementById("error") 
         reportError.classList.add("alert", "alert-warning")
         reportError.textContent = "Ops, ocorreu um erro."
-  })
+    })
