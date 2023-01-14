@@ -1,12 +1,14 @@
 require 'spec_helper'
 require 'sinatra'
-require './import_data_csv.rb'
+require './import_data_csv'
 
 describe ImportDataCsv do
 	context '#insert_records' do
 		it 'deve inserir os registros no banco de dados' do
 			conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
-			ImportDataCsv.new.insert_records('./spec/support/exams.csv')
+			import_data = ImportDataCsv.new
+      import_data.create_table
+      import_data.insert_records('./spec/support/exams.csv')
 			all_exams = conn.exec('SELECT * FROM EXAMS').to_a
 			
       expect(all_exams[0]['address']).to eq '165 Rua Rafaela'

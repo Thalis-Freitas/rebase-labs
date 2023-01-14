@@ -9,6 +9,8 @@ services:
   app:
     image: ruby
     working_dir: /app
+    environment:
+      - REDIS_URL=redis://redis:6379/0
     volumes:
       - .:/app
       - rubygems:/usr/local/bundle
@@ -17,6 +19,9 @@ services:
       - '3000:3000'
     command: sh -c 'bundle && ruby server.rb'
 
+  redis:
+    image: redis
+    
 volumes:
   rubygems:
   pgdata:

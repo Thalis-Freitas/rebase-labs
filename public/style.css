@@ -1,6 +1,6 @@
 :root {
     --border-color: rgb(231, 231, 231);
-  }
+}
 
 th{
     border-top: 1px solid var(--border-color);

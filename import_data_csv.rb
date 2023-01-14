@@ -60,4 +60,12 @@ class ImportDataCsv
     exams = @conn.exec('SELECT * FROM EXAMS LIMIT 300')
     exams.map { |e| e }
   end
+
+  def close
+    @conn.close
+  end
+
+  def drop_table
+    @conn.exec('DROP TABLE EXAMS')
+  end
 end
