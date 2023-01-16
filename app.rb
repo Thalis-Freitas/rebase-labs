@@ -1,5 +1,5 @@
 require 'sinatra'
-require './import_data_csv'
+require './import_csv'
 require './app/jobs/importer_job'
 require 'pg'
 
@@ -9,14 +9,12 @@ end
 
 get '/api/exams' do
 	content_type 'application/json'
-	data = ImportDataCsv.new
-  data.create_table
-	data.insert_records('./data.csv')
-	data.all.to_json
+	data = Database.new
+	data.all_exams.to_json
 end
 
 post '/import' do
-	ImportDataCsv.new.insert_records(params[:csv])
+	Database.new.insert_exams_records(params[:csv])
 	'Dados registrados com sucesso!'
 end
 

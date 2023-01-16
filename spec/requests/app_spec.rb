@@ -1,5 +1,5 @@
 require 'spec_helper'
-require './import_data_csv'
+require './import_csv'
 require './app'
 
 describe 'App' do
@@ -8,8 +8,7 @@ describe 'App' do
 	end
 
 	it 'get /api/exams' do
-    conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
-    ImportDataCsv.new.insert_records('./spec/support/exams.csv')
+    Database.new.insert_exams_records('./spec/support/exams.csv')
     
     get '/api/exams'
 
@@ -18,8 +17,7 @@ describe 'App' do
   end
 
 	it 'get /' do
-		conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
-    ImportDataCsv.new.insert_records('./spec/support/exams.csv')
+    Database.new.insert_exams_records('./spec/support/exams.csv')
 
 		get '/'
 

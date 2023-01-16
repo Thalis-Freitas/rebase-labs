@@ -22,13 +22,13 @@ RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     config.include Rack::Test::Methods
     config.before(:example) do
-      import_data = ImportDataCsv.new
-      import_data.create_table
+      db = Database.new
+      db.create_exams_table
     end
     config.after(:example) do
-      import_data = ImportDataCsv.new
-      import_data.drop_table
-      import_data.close
+      db = Database.new
+      db.drop_exams_table
+      db.close
     end
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods

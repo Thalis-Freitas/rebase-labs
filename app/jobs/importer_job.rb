@@ -5,7 +5,7 @@ class ImporterJob
 
   def perform(csv)
     sleep 5
-    ImportDataCsv.new.insert_records(csv)
+    Database.new.insert_exams_records(csv)
     puts 'Dados registrados com sucesso!'
   end
 end

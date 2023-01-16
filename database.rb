@@ -1,12 +1,12 @@
-require 'csv'
 require 'pg'
+require './import_csv'
 
-class ImportDataCsv
+class Database
   def initialize
     @conn = PG.connect(host: 'postgres', dbname: 'postgres', user: 'postgres')
   end
 
-  def create_table
+  def create_exams_table
     @conn.exec("CREATE TABLE IF NOT EXISTS EXAMS (
                   ID SERIAL PRIMARY KEY,
                   TAXPAYER_REGISTRY VARCHAR(14) NOT NULL,
@@ -28,7 +28,7 @@ class ImportDataCsv
                )
   end
 
-  def csv_data(csv)
+  def self.csv_data(csv)
     rows = CSV.read(csv, col_sep: ';')
     columns = rows.shift
 
@@ -40,8 +40,8 @@ class ImportDataCsv
     end
   end
 
-  def insert_records(csv)
-    csv_data(csv).each do |r|
+  def insert_exams_records(csv)
+    ImportCsv.csv_data(csv).each do |r|
       @conn.exec("INSERT INTO EXAMS (TAXPAYER_REGISTRY, NAME, EMAIL, BIRTH_DATE, ADDRESS, CITY, STATE,
                                      MEDICAL_CRM, MEDICAL_CRM_STATE, MEDICAL_NAME, MEDICAL_EMAIL,
                                      TOKEN, EXAM_DATE, TYPE_OF_EXAM, LIMITS, RESULT)
@@ -56,8 +56,8 @@ class ImportDataCsv
     end
   end
 
-  def all
-    exams = @conn.exec('SELECT * FROM EXAMS LIMIT 300')
+  def all_exams
+    exams = @conn.exec('SELECT * FROM EXAMS')
     exams.map { |e| e }
   end
 
@@ -65,7 +65,7 @@ class ImportDataCsv
     @conn.close
   end
 
-  def drop_table
-    @conn.exec('DROP TABLE EXAMS')
+  def drop_exams_table
+    @conn.exec('DROP TABLE IF EXISTS EXAMS')
   end
 end
