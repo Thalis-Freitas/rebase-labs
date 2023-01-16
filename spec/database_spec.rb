@@ -4,7 +4,7 @@ require './database'
 require './import_csv'
 
 describe Database do
-	context '#insert_records' do
+	context '#insert_exams_records' do
 		it 'deve inserir os registros no banco de dados' do
       db = Database.new
       db.create_exams_table

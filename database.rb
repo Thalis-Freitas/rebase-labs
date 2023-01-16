@@ -28,18 +28,6 @@ class Database
                )
   end
 
-  def self.csv_data(csv)
-    rows = CSV.read(csv, col_sep: ';')
-    columns = rows.shift
-
-    rows.map do |row|
-      row.each_with_object({}).with_index do |(cell, acc), idx|
-        column = columns[idx]
-        acc[column] = cell
-      end
-    end
-  end
-
   def insert_exams_records(csv)
     ImportCsv.csv_data(csv).each do |r|
       @conn.exec("INSERT INTO EXAMS (TAXPAYER_REGISTRY, NAME, EMAIL, BIRTH_DATE, ADDRESS, CITY, STATE,
@@ -67,5 +55,9 @@ class Database
 
   def drop_exams_table
     @conn.exec('DROP TABLE IF EXISTS EXAMS')
+  end
+
+  def find_exams_by_token(token)
+    @conn.exec("SELECT * FROM EXAMS WHERE TOKEN='#{token}'").to_a
   end
 end

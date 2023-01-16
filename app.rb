@@ -13,6 +13,12 @@ get '/api/exams' do
 	data.all_exams.to_json
 end
 
+get '/api/exams/:token' do
+  content_type 'application/json'
+	exams = Database.new.find_exams_by_token(params[:token])
+  exams.to_json
+end  
+
 post '/import' do
 	Database.new.insert_exams_records(params[:csv])
 	'Dados registrados com sucesso!'
