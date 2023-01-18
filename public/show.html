@@ -11,20 +11,28 @@
 <body>
     <h1 class="text-center m2">Exame {{token}}</h1>
     <div id="error" class="container text-center" role="alert"></div>
-    <ul id="ul"></ul>
-    <table class="table table-dark">
-        <thead>
-            <tr>
-                <th scope="col">Tipo</th>
-                <th scope="col">Limites</th>
-                <th scope="col">Resultado</th>
-            </tr>
-        </thead>
-        <tbody id="tbory">
-        </tbody>
-    </table>
-    <div class="text-end">
-        <a class="btn btn-dark mb-3 me-3" href="http://localhost:3000/">Voltar para a lista</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Limites</th>
+                            <th scope="col">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbory">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-4">
+                <ul id="ul" class="list-group"></ul>
+                <div class="text-end">
+                    <a class="btn btn-outline-dark mt-3" href="http://localhost:3000/">Voltar para a lista</a>
+                </div>
+            </div>
+        </div>
     </div>
     <script type="text/javascript" src="../exams_utils.js"></script>
     <script type="text/javascript" src="../exam.js"></script>

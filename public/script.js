@@ -8,7 +8,7 @@ fetch(url)
     .then((exams) => {
         exams.forEach(exam => {
             let newRow = tBory.insertRow(-1)
-            const anchor = document.createElement('a')
+            const anchor = document.createElement("a")
             anchor.href = `http://localhost:3000/exams/${exam.token}`
             anchor.textContent = `${exam.token}`
             tokenRow = newRow.insertCell(0)
