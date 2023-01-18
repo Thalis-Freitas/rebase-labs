@@ -7,6 +7,12 @@ get '/' do
 	send_file './public/index.html'
 end
 
+get '/exams/:token' do
+	exams = Database.new.find_exams_by_token(params[:token])
+	template = File.read('public/show.html')
+  template.gsub!('{{token}}', params['token'])
+end 
+
 get '/api/exams' do
 	content_type 'application/json'
 	data = Database.new

@@ -22,6 +22,16 @@ describe 'App' do
     expect(last_response.body).to include 'Limites'
 	end
 
+  it 'get /exams/:token' do
+    Database.new.insert_exams_records('./spec/support/exams.csv')
+
+		get '/exams/IN33R0'
+
+    expect(last_response.status).to eq 200
+    expect(last_response.body).to include 'Exame IN33R0'
+    expect(last_response.body).not_to include 'IQCZ17'
+  end
+
 	it 'get /api/exams' do
     Database.new.insert_exams_records('./spec/support/exams.csv')
     
