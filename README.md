@@ -1,6 +1,7 @@
 # Rebase Labs
 
 Uma app web para listagem de exames médicos desenvolvida para acompanhar os encontros de Laboratório da Rebase com o Treinadev. 
+
 [Documento com as orientações para elaborar o projeto](instrucoes.md).
 
 ## Tech Stack
@@ -137,9 +138,9 @@ Exemplo com token `IQCZ17`
    "medical_email":"denna@wisozk.biz",
    "token":"IQCZ17",
    "exam_date":"2021-08-05",
-   "type_of_exam":"hemácias"
-   ,"limits":"45-52"
-   ,"result":"97"
+   "type_of_exam":"hemácias",
+   "limits":"45-52",
+   "result":"97"
    },
    {
    "id":"2",
